@@ -22,9 +22,10 @@ GameObject:
   - 33: {fileID: 33000013620990404}
   - 65: {fileID: 65000010482563252}
   - 23: {fileID: 23000012462856038}
+  - 114: {fileID: 114000013313714244}
   m_Layer: 0
-  m_Name: MeleeHeroPrefab
-  m_TagString: Untagged
+  m_Name: SentinelPrefab
+  m_TagString: PlayerUnit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,3 +91,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114000013313714244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013077629050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1149f32c9d04ec4ca82c259ae2d1ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

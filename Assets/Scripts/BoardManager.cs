@@ -1,100 +1,46 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 
 public class BoardManager : MonoBehaviour {
 
-    private const float TILE_OFFSET = 0.5f;
-    private const float TILE_SIZE = 1f;
+    public static BoardManager Instance { get; set; }
 
-    private int selectionX, selectionZ = -1;
+    private const int GRID_DEPTH = 5;
+    private const int GRID_WIDTH = 9;
 
-    public List<GameObject> heroPrefabs;
-    private List<GameObject> activeHeroes = new List<GameObject>();
+    public GameObject TilePrefab;
 
+    public Transform Parent;
+    public Transform UnitManager;
+    
 
-    void Start()
-    {
-        SpawnHero(0, GetTileCenter(4, 0));
-    }
+	// Use this for initialization
+	void Start ()
+	{
+
+	    Instance = this;
+        CreateGrid();
+        
+	}
+	
 	// Update is called once per frame
 	void Update () {
-
-        UpdateSelection();
-        DrawChessboard();
+	
 	}
 
-    private void UpdateSelection()
+
+    private void CreateGrid()
     {
-        if (!Camera.main)
+
+        for (int x = 0; x <= GRID_WIDTH; x++)
         {
-            return;
-        }
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 25.0f, LayerMask.GetMask("ChessPlane")))
-        {
-            selectionX = (int) hit.point.x;
-            selectionZ = (int) hit.point.z;
-        }
-        else
-        {
-            selectionX = -1;
-            selectionZ = -1;
-        }
-    }
-
-    private void SpawnHero(int index, Vector3 position)
-    {
-        //something went wrong
-        if (heroPrefabs.Count < index || index < 0) return;
-
-        var hero = Instantiate(heroPrefabs[index], position, Quaternion.identity) as GameObject;
-        hero.transform.SetParent(transform);
-
-        activeHeroes.Add(hero);
-        
-    }
-
-    private void DrawChessboard()
-    {
-        Vector3 widthLine = Vector3.right * 9;
-        Vector3 heightLine = Vector3.forward * 5;
-
-        //Draw the grid height
-        for (int i = 0; i <= 5; i++)
-        {
-            Vector3 start = Vector3.forward * i;
-            Debug.DrawLine(start, start + widthLine);
-
-            //Draw the grid width
-            for (int j = 0; j <= 9; j++)
+            for(int z = 0; z <= GRID_DEPTH; z++)
             {
-                start = Vector3.right * j;
-                Debug.DrawLine(start, start + heightLine);
+               var obj = Instantiate(TilePrefab, new Vector3(x,0,z), Quaternion.identity) as GameObject;
+                if (obj != null) obj.transform.SetParent(Parent);
             }
         }
 
-        //Draw the selection
-        if(selectionX >= 0 && selectionZ >= 0)
-        {
-            Debug.DrawLine(
-                Vector3.forward * selectionZ + Vector3.right * selectionX,
-                Vector3.forward * (selectionZ + 1) + Vector3.right * (selectionX + 1)
-                );
-            Debug.DrawLine(
-                Vector3.forward * (selectionZ + 1) + Vector3.right * selectionX,
-                Vector3.forward * selectionZ + Vector3.right * (selectionX + 1)
-                );
-        }
-
     }
-
-    private Vector3 GetTileCenter(int x, int y)
-    {
-        Vector3 origin = Vector3.zero;
-        origin.x += (TILE_SIZE * x) + TILE_OFFSET;
-        origin.z += (TILE_SIZE * y) + TILE_OFFSET;
-
-        return origin;
-    }
+    
 }
