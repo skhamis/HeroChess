@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 350130948}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 4, y: 7.65, z: -2}
+  m_LocalPosition: {x: 4.49, y: 7.09, z: -1.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
   m_Children: []
@@ -217,7 +217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6e5751216877a4cb5b764dbb8b35a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HeroPrefab: {fileID: 1000013077629050, guid: 40c5cb7523578534db088b2fe6596a1c, type: 2}
+  UnitPrefabs:
+  - {fileID: 1000013077629050, guid: 40c5cb7523578534db088b2fe6596a1c, type: 2}
+  - {fileID: 1000012898702186, guid: 6be5d9fc61c8652449d7d3de5823feb8, type: 2}
+  - {fileID: 1000013077629050, guid: 3ae0e26e783850d41bb4d5b687558d5e, type: 2}
+  - {fileID: 1000013077629050, guid: 19843341b2db52e419937e488911c0a1, type: 2}
   Parent: {fileID: 668582160}
 --- !u!1 &1419997610
 GameObject:
@@ -227,8 +231,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1419997612}
-  - 114: {fileID: 1419997613}
   - 114: {fileID: 1419997611}
+  - 114: {fileID: 1419997613}
   m_Layer: 0
   m_Name: BoardManager
   m_TagString: Untagged
@@ -270,7 +274,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1419997610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4af395c636d887469e50d3330f7e2a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 554593d2714fce5479145ead1f92daf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TilePrefab: {fileID: 1000014190959644, guid: a9046ce232ddca34fb760a5137d810f7, type: 2}

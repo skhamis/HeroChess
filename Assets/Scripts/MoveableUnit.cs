@@ -20,4 +20,14 @@ public abstract class MoveableUnit : MonoBehaviour {
     {
         return new bool[9,5];
     }
+
+    public virtual bool EnemyInAttackRange(int x, int z)
+    {
+        return false;
+    }
+
+    public virtual void Attack()
+    {
+        Debug.Log("Attacked Enemy");
+    }
 }

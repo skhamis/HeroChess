@@ -1,13 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
+using System;
 
-public class SentinelUnit : MoveableUnit
-{
+public class WizardUnit : MoveableUnit {
+
+
     public override bool[,] PossibleMove()
     {
-        
+
         //Left
         for (int i = CurrentX; Math.Abs(i - CurrentX) < 2;)
         {
@@ -54,11 +54,10 @@ public class SentinelUnit : MoveableUnit
         return PossibleMoves;
     }
 
-
     public override bool EnemyInAttackRange(int x, int z)
     {
 
-        if(Math.Abs(CurrentX - x) <= 1 && Math.Abs(CurrentZ - z) <= 1)
+        if (Math.Abs(CurrentX - x) <= 3 && Math.Abs(CurrentZ - z) <= 3)
         {
             return true;
         }
@@ -68,6 +67,6 @@ public class SentinelUnit : MoveableUnit
 
     public override void Attack()
     {
-        Debug.Log("Sentinel Attacked");
+        Debug.Log("Wizard Attacked");
     }
 }

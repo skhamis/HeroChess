@@ -25,6 +25,13 @@ public class PlayerController : MonoBehaviour {
 
                 if (hit.collider.CompareTag("PlayerUnit"))
                 {
+                    //If we've already have that unit selected, deselect
+                    if(SelectedUnit == hit.collider.gameObject)
+                    {
+                        SelectedUnit = null;
+                        UnitManager.Instance.MoveUnit(x, z);
+                        return;
+                    }
                     SelectedUnit = hit.collider.gameObject;
                     UnitManager.Instance.SelectUnit(x,z, SelectedUnit);
                     Debug.Log("Player Unit was selected");
@@ -38,7 +45,7 @@ public class PlayerController : MonoBehaviour {
                     switch (hit.collider.tag)
                     {
                         case "EnemyUnit":
-                            Debug.Log("Hit enemy");
+                            UnitManager.Instance.AttackEnemy(x,z);
                             break;
                         default:
                             UnitManager.Instance.MoveUnit(x, z);

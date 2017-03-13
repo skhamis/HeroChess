@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 public class UnitManager : MonoBehaviour {
 
     public static UnitManager Instance { get; set; }
-    public GameObject HeroPrefab;
+    
     
     public MoveableUnit[,] MoveableUnits { get; set; }
+
+    public List<GameObject> UnitPrefabs;
 
     private MoveableUnit selectedUnit;
     private GameObject _selectedUnitObj;
 
     private bool[,] allowedMoves { get; set; }
 
-    
+    public enum UnitType
+    {
+        Sentinel, Mage, Cleric, Trapper
+    }
 
     public Transform Parent;
     
@@ -25,17 +29,18 @@ public class UnitManager : MonoBehaviour {
 
         MoveableUnits = new MoveableUnit[9,5];
 
-        SpawnHero(1, 1);
-        SpawnHero(4, 3);
-        SpawnHero(5, 4);
+        SpawnHero(UnitType.Sentinel, 1, 1);
+        SpawnHero(UnitType.Mage, 4, 3);
+        SpawnHero(UnitType.Cleric, 5, 4);
+        SpawnHero(UnitType.Trapper, 7, 4);
     }
 	
 
 
-    private void SpawnHero(int x, int z)
+    private void SpawnHero(UnitType unitType, int x, int z)
     {
-        // Instantiate(HeroPrefab, new Vector3(position.x, 0, position.z), Quaternion.AngleAxis(90, Vector3.right));
-        var obj = Instantiate(HeroPrefab, new Vector3(x, 1, z), Quaternion.identity) as GameObject;
+
+        var obj = Instantiate(UnitPrefabs[(int)unitType], new Vector3(x, 1, z), Quaternion.identity) as GameObject;
 
         MoveableUnits[x, z] = obj.GetComponent<MoveableUnit>();
         MoveableUnits[x,z].SetPosition(x,z);
@@ -48,6 +53,8 @@ public class UnitManager : MonoBehaviour {
         {
             return;
         }
+        //Hide any existing highlights
+        BoardHighlights.Instance.HideHighlights();
 
         //If not the players turn
 
@@ -86,4 +93,19 @@ public class UnitManager : MonoBehaviour {
         BoardHighlights.Instance.HideHighlights();
         
     }
+
+    public void AttackEnemy(int x, int z)
+    {
+        if (selectedUnit.EnemyInAttackRange(x,z))
+        {
+            selectedUnit.Attack();
+        }
+    }
+
+
+
+
+
 }
+
+

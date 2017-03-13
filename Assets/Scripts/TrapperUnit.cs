@@ -3,13 +3,13 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
 
-public class SentinelUnit : MoveableUnit
+public class TrapperUnit : MoveableUnit
 {
     public override bool[,] PossibleMove()
     {
         
         //Left
-        for (int i = CurrentX; Math.Abs(i - CurrentX) < 2;)
+        for (int i = CurrentX; Math.Abs(i - CurrentX) < 3;)
         {
             i--;
 
@@ -20,7 +20,7 @@ public class SentinelUnit : MoveableUnit
         }
 
         //Right
-        for (int i = CurrentX; Math.Abs(i - CurrentX) < 2;)
+        for (int i = CurrentX; Math.Abs(i - CurrentX) < 3;)
         {
             i++;
 
@@ -31,7 +31,7 @@ public class SentinelUnit : MoveableUnit
         }
 
         //Up
-        for (int j = CurrentZ; Math.Abs(j - CurrentZ) < 2;)
+        for (int j = CurrentZ; Math.Abs(j - CurrentZ) < 3;)
         {
             j++;
 
@@ -41,7 +41,7 @@ public class SentinelUnit : MoveableUnit
             PossibleMoves[CurrentX, j] = true;
         }
         //Down
-        for (int j = CurrentZ; Math.Abs(j - CurrentZ) < 2;)
+        for (int j = CurrentZ; Math.Abs(j - CurrentZ) < 3;)
         {
             j--;
 
@@ -54,11 +54,10 @@ public class SentinelUnit : MoveableUnit
         return PossibleMoves;
     }
 
-
     public override bool EnemyInAttackRange(int x, int z)
     {
 
-        if(Math.Abs(CurrentX - x) <= 1 && Math.Abs(CurrentZ - z) <= 1)
+        if (Math.Abs(CurrentX - x) <= 1 && Math.Abs(CurrentZ - z) <= 1)
         {
             return true;
         }
@@ -68,6 +67,6 @@ public class SentinelUnit : MoveableUnit
 
     public override void Attack()
     {
-        Debug.Log("Sentinel Attacked");
+        Debug.Log("Trapper Attacked");
     }
 }
