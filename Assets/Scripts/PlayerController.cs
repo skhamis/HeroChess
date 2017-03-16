@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour {
                             break;
 
                     }
+                    SelectedUnit = null;
                 }
             }
         }

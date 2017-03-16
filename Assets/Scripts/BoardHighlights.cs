@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class BoardHighlights : MonoBehaviour
 {
@@ -38,7 +39,8 @@ public class BoardHighlights : MonoBehaviour
                 {
                     GameObject go = GetHighlightedObject();
                     go.SetActive(true);
-                    go.transform.position = new Vector3(i,1,j);
+                    go.transform.position = new Vector3(i + 0.5f, 0.001f, j + 0.5f);
+                    go.transform.localScale = Vector3.one * (1 - 0.1f);
                     go.transform.SetParent(BoardManager.Instance.Parent);
                 }
             }

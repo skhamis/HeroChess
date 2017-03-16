@@ -29,21 +29,19 @@ public class UnitManager : MonoBehaviour {
 
         MoveableUnits = new MoveableUnit[9,5];
 
-        SpawnHero(UnitType.Sentinel, 1, 1);
-        SpawnHero(UnitType.Mage, 4, 3);
-        SpawnHero(UnitType.Cleric, 5, 4);
-        SpawnHero(UnitType.Trapper, 7, 4);
+        SpawnHero(UnitType.Sentinel, 1,1);
+        SpawnHero(UnitType.Mage, 4,3);
+        SpawnHero(UnitType.Cleric, 5,4);
+        SpawnHero(UnitType.Trapper, 7,4);
     }
-	
 
-
-    private void SpawnHero(UnitType unitType, int x, int z)
+    private void SpawnHero(UnitType unitType, int x, int y)
     {
 
-        var obj = Instantiate(UnitPrefabs[(int)unitType], new Vector3(x, 1, z), Quaternion.identity) as GameObject;
+        var obj = Instantiate(UnitPrefabs[(int)unitType], new Vector3(x + 0.5f, 0, y + 0.5f), Quaternion.identity) as GameObject;
 
-        MoveableUnits[x, z] = obj.GetComponent<MoveableUnit>();
-        MoveableUnits[x,z].SetPosition(x,z);
+        MoveableUnits[x, y] = obj.GetComponent<MoveableUnit>();
+        MoveableUnits[x, y].SetPosition(x, y);
         obj.transform.SetParent(Parent);
     }
 
@@ -73,7 +71,7 @@ public class UnitManager : MonoBehaviour {
         if (allowedMoves[x, z])
         {
             _selectedUnitObj.transform.position
-                = new Vector3(x, _selectedUnitObj.transform.position.y, z);
+                = new Vector3(x + 0.5f, 0, z + 0.5f);
 
            
             //Remove the obj from the prev position

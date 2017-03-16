@@ -1,43 +1,38 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class BoardManager : MonoBehaviour {
 
     public static BoardManager Instance { get; set; }
 
-    private const int GRID_DEPTH = 5;
-    private const int GRID_WIDTH = 9;
+    private Vector2 _gridSize = new Vector2(9,5);
 
-    public GameObject TilePrefab;
+    public Transform TilePrefab;
 
     public Transform Parent;
     public Transform UnitManager;
     
-
+    public List<GameObject> TileObjects { get; set; }
 	// Use this for initialization
 	void Start ()
 	{
 
 	    Instance = this;
+	    TileObjects = new List<GameObject>();
         CreateGrid();
         
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
     private void CreateGrid()
     {
 
-        for (int x = 0; x <= GRID_WIDTH; x++)
+        for (int x = 0; x <= _gridSize.x; x++)
         {
-            for(int z = 0; z <= GRID_DEPTH; z++)
+            for(int z = 0; z <= _gridSize.y; z++)
             {
-               var obj = Instantiate(TilePrefab, new Vector3(x,0,z), Quaternion.identity) as GameObject;
-                if (obj != null) obj.transform.SetParent(Parent);
+               Transform tile = Instantiate(TilePrefab, new Vector3(x + 0.5f, 0, z + 0.5f), Quaternion.Euler(Vector3.right*90)) as Transform;
+               tile.localScale = Vector3.one*(1 - 0.1f);
+               tile.transform.SetParent(Parent);
             }
         }
 

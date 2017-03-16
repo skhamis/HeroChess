@@ -28,6 +28,6 @@ public abstract class MoveableUnit : MonoBehaviour {
 
     public virtual void Attack()
     {
-        Debug.Log("Attacked Enemy");
+        Debug.Log("MoveableUnit: Attacked Enemy");
     }
 }
